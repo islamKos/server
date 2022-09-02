@@ -32,7 +32,9 @@ async function start() {
   try {
     await mongoose.connect(process.env.MONGODB_URI)
 
-    app.listen(process.env.PORT || 3003, () => console.log(`Server started on port: ${PORT}`))
+    app.listen(process.env.PORT || 3003, () =>
+      console.log(`Server started on port: ${PORT}`)
+    )
   } catch (error) {
     console.log(error)
   }
