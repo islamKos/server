@@ -28,15 +28,14 @@ app.use('/api/auth', authRoute)
 app.use('/api/posts', postRoute)
 app.use('/api/comments', commentRoute)
 
-async function start() {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI)
+mongoose
+.connect(process.env.MONGODB_URI)
+.then(() => console.log('DB ok'))
+.catch((err) => console.log('DB error', err))
 
-    app.listen(process.env.PORT || 3003, () =>
-      console.log(`Server started on port: ${PORT}`)
-    )
-  } catch (error) {
-    console.log(error)
+app.listen(process.env.PORT || 3003, (err) => {
+  if (err) {
+    return console.log(err)
   }
-}
-start()
+  console.log('Server ok')
+})
