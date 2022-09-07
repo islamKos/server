@@ -11,12 +11,6 @@ import commentRoute from './routes/comments.js'
 const app = express()
 dotenv.config()
 
-// Constants
-const PORT = process.env.PORT || 3003
-const DB_USER = process.env.DB_USER
-const DB_PASSWORD = process.env.DB_PASSWORD
-const DB_NAME = process.env.DB_NAME
-
 // Middleware
 app.use(cors())
 app.use(fileUpload())
@@ -29,9 +23,9 @@ app.use('/api/posts', postRoute)
 app.use('/api/comments', commentRoute)
 
 mongoose
-.connect(process.env.MONGODB_URI)
-.then(() => console.log('DB ok'))
-.catch((err) => console.log('DB error', err))
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log('DB ok'))
+  .catch((err) => console.log('DB error', err))
 
 app.listen(process.env.PORT || 3003, (err) => {
   if (err) {
